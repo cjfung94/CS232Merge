@@ -2,13 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-<<<<<<< HEAD
 #ifndef _snode_H_
 #define _snode_H_
-=======
-#ifndef _snodeH
-#define _snodeH
->>>>>>> galmerge/master
 
 typedef struct snode snode_t;
 
@@ -26,3 +21,4 @@ void snode_set_str(snode_t* snode , char* string);
 
  
  #endif
+ 

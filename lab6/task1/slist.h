@@ -106,9 +106,5 @@ struct snode* slist_get_front(struct slist* l);
 struct snode* slist_get_back(struct slist* l);
 
 
-<<<<<<< HEAD
-=======
-struct snode* snode_get_next(struct snode* s);
->>>>>>> galmerge/master
 
 #endif /* _slist_H_ */

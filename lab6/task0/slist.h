@@ -105,10 +105,7 @@ struct snode* slist_get_front(struct slist* l);
 
 struct snode* slist_get_back(struct slist* l);
 
-<<<<<<< HEAD
 char * snode_get_str(struct snode* s);
-=======
->>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
 
 struct snode* snode_get_next(struct snode* s);
 

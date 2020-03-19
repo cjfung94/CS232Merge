@@ -146,11 +146,6 @@ void slist_destroy(slist_t *l)
     free(now);
     now = listdestroy;
   } 
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
   free(l);
   
 
@@ -204,30 +199,16 @@ uint32_t slist_length(slist_t *l)
 void slist_delete(slist_t *l, char * str) //change return type
 {
     snode_t * pred = l->front;
-<<<<<<< HEAD
     snode_t* temp = NULL;
     
-=======
-    snode_t* temp = l->front;
-
-  
->>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
     while(snode_get_next(pred) != NULL)
     { 
         if(strcmp(snode_get_str(snode_get_next(pred)), str) == 0)
         {
-<<<<<<< HEAD
             temp = snode_get_next(pred); // Temp is now Sugar
             snode_set_next(pred, snode_get_next(temp));
             free(snode_get_str(temp)); // Freeing Sugar String
             free(temp); // If I dont free str, then it goes to Sugar and unlinks the rest.
-=======
-            temp = snode_get_next(pred); 
-            snode_set_next(pred, snode_get_next(temp));
-            
-            snode_destroy(temp);
-            
->>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
           
         }
         else 
@@ -236,7 +217,6 @@ void slist_delete(slist_t *l, char * str) //change return type
 
         }
         l->back = pred;
-<<<<<<< HEAD
       
 
     }
@@ -251,22 +231,6 @@ void slist_delete(slist_t *l, char * str) //change return type
       
       l->back = l->front;
     }
-=======
-
-    }
-
-
-  if (strcmp(snode_get_str(l->front), str) == 0)
-    {
-      snode_t * first = l->front;
-      l->front = snode_get_next(first); //after a is gone, and only c is left, l->front then becomes NULL
-      free(snode_get_str(first));
-      free(first);
-      
-      l->back = l->front;
-    }
-
->>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
 }
 
 
