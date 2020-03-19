@@ -11,10 +11,10 @@ typedef struct snode {
 }snode_t;
 
 snode_t *snode_create(char *s) 
-{   
-    
+{
+
     snode_t * space = (snode_t *) malloc (sizeof(snode_t));
-   
+
     space -> str = (char *) malloc (strlen(s) * sizeof(char) + 1);
     strcpy(space -> str, s);
     space -> next = NULL;//TODO: implement snode_create, change the prototype to
@@ -40,12 +40,20 @@ void snode_set_next(snode_t* snode1, snode_t* snode_next)
 void snode_set_str(snode_t* snode , char* string)
 {
   snode -> str = (char *) malloc (strlen(string) * sizeof(char) + 1);
+<<<<<<< HEAD
+  strcpy(snode -> str , string);
+=======
     strcpy(snode -> str , string);
 
+>>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
 }
 
 snode_t* snode_get_next(snode_t* snode) //n1
 {
+<<<<<<< HEAD
+ 
+=======
+>>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
   return snode->next;
 
 }
@@ -53,8 +61,12 @@ snode_t* snode_get_next(snode_t* snode) //n1
 
 char* snode_get_str(snode_t* snode)
 {
+<<<<<<< HEAD
+  return snode->str;
+=======
   //char* getStr = snode->str;
   //getStr -> str = l->front->str;
   return snode->str;
   
+>>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
 }

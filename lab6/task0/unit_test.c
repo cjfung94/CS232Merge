@@ -19,7 +19,11 @@ test_list_node_new() {
   char *val = "some value";
   snode_t *node = snode_create(val);
   assert(strcmp(snode_get_str(node), val)==0);
+<<<<<<< HEAD
+  free(snode_get_str(node));
+=======
   free(snode_get_str(node)); //added
+>>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
   free(node);
 }
 
@@ -32,6 +36,7 @@ test_list_add_back() {
   slist_add_back(list, "a");
   slist_add_back(list, "b");
   slist_add_back(list, "c");
+  
 
   // Assertions
   snode_t *a, *b, *c;
@@ -65,8 +70,10 @@ test_list_add_front() {
   //slist_traverse(list); //------------------------------------------------I put this here---------------ERASE WHEN DONE--------------------------
 
   snode_t *a, *b, *c;
+  
   c = slist_get_front(list);
  assert(strcmp(snode_get_str(c), "c") == 0);
+
 
   a = slist_get_back(list);
   assert(strcmp(snode_get_str(a), "a") == 0);
@@ -132,6 +139,8 @@ test_list_delete() {
   assert(strcmp(snode_get_str(c), "c") == 0);
   assert(c == snode_get_next(a));
   assert(NULL == snode_get_next(c));
+  
+  
 
   slist_delete(list, "a");
   //slist_traverse(list); //-------------------------delete later-----------------------
@@ -142,13 +151,19 @@ test_list_delete() {
   assert(strcmp(snode_get_str(c), "c") == 0);
   assert(c == slist_get_back(list));
   assert(NULL == snode_get_next(c));
+<<<<<<< HEAD
+
+ slist_delete(list, "c");
+
+=======
 
   slist_delete(list, "c");
 //printf("%d" , slist_length(list)); //---------------------------------------delete---------------------------
 //slist_traverse(list); //-------------------------delete later-----------------------
 
+>>>>>>> e5b1f256a5da48e3cd670a7c50220e8b2700d1e7
   assert(0 == slist_length(list));
-  assert(NULL == slist_get_front(list));
+ assert(NULL == slist_get_front(list));
   assert(NULL == slist_get_back(list));
 
   slist_destroy(list);

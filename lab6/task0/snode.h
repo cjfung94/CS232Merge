@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef _snode_H_
-#define _snode_H_
+#ifndef _snodeH
+#define _snodeH
 
 typedef struct snode snode_t;
 

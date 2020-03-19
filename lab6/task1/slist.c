@@ -27,10 +27,7 @@ typedef struct slist {
 slist_t *slist_create()
 {
     slist_t * newlist = (slist_t*) calloc (1,sizeof(slist_t));
-<<<<<<< HEAD
   
-=======
->>>>>>> galmerge/master
     return newlist;
 
 }
@@ -46,20 +43,12 @@ snode_t* slist_add_back(slist_t *l, char *str)
 
     snode_t * newNode = (snode_t*) calloc (1,sizeof(slist_t));
     snode_set_str(newNode, str);
-<<<<<<< HEAD
-
-=======
->>>>>>> galmerge/master
    if(l->back == NULL)
    {
       l->front = newNode;
       l->back = newNode;
-<<<<<<< HEAD
       
       
-=======
-
->>>>>>> galmerge/master
    }
 
    if(l->front != NULL)
@@ -67,26 +56,16 @@ snode_t* slist_add_back(slist_t *l, char *str)
        
        snode_set_next(l->back, newNode);
        l->back = newNode;
-<<<<<<< HEAD
 
        
    }
 
 
   l->size++;
-=======
-   }
-
-   l -> size++;
->>>>>>> galmerge/master
 
    return newNode;
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> galmerge/master
 }
 
 
@@ -103,7 +82,6 @@ snode_t* slist_add_front(slist_t *l, char *str)
   snode_t * newNode = (snode_t *) calloc (1, sizeof(slist_t));
   snode_set_str(newNode, str);
   snode_set_next(newNode, l->front);
-<<<<<<< HEAD
 
 
 
@@ -111,11 +89,6 @@ snode_t* slist_add_front(slist_t *l, char *str)
   {
     l -> back = newNode;
 
-=======
-  if (snode_get_next(newNode) == NULL)
-  {
-    l -> back = newNode;
->>>>>>> galmerge/master
   }
   else
   {
@@ -125,11 +98,8 @@ snode_t* slist_add_front(slist_t *l, char *str)
       if (snode_get_next(backtemp) == NULL)
       {
         l -> back = backtemp;
-<<<<<<< HEAD
 
         
-=======
->>>>>>> galmerge/master
       }
       else
       {
@@ -139,10 +109,6 @@ snode_t* slist_add_front(slist_t *l, char *str)
     }
   }
   l -> front = newNode;
-<<<<<<< HEAD
-
-=======
->>>>>>> galmerge/master
   l->size++;
 
   return l->front;
@@ -227,24 +193,15 @@ void slist_traverse(slist_t *l){
  */
 uint32_t slist_length(slist_t *l)
 {
-<<<<<<< HEAD
   /*int count = 0;
   snode_t * pcount = l->front;
-=======
-  
- /* snode_t * pcount = l->front;
->>>>>>> galmerge/master
 
   while (pcount != NULL)
     {
       count++;
       pcount = snode_get_next(pcount);
-<<<<<<< HEAD
     }
   return count;*/
-=======
-    }*/
->>>>>>> galmerge/master
   return l->size;
 }
 
@@ -291,10 +248,6 @@ void slist_delete(slist_t *l, char * str) //change return type
       
       l->back = l->front;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> galmerge/master
     l->size--;
 
 }
