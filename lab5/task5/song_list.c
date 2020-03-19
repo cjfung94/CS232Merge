@@ -8,7 +8,7 @@ int main(void)   {
 
     struct snode *node;
 
-    song_list = slist_create();
+    song_list = slist_create(); 
 
     slist_add_back(song_list, "Thinking Out Loud");
     slist_add_back(song_list, "See You Again");

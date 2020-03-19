@@ -6,8 +6,8 @@
 typedef struct snode {
   //TODO: change str to dynamic allcoation
   void * data;
+
   struct snode *next;
-  
 }snode_t;
 
 snode_t *snode_create(char *s) 
@@ -24,10 +24,37 @@ snode_t *snode_create(char *s)
 }
 void snode_destroy(snode_t * s) 
 {
-snode_t* snode = s;
+//snode_t* snode = s;
 
- free(snode->data);
+ free(s->data);
  free(s);
  //TODO: implement snode_destroy
  
+}
+
+void snode_set_next(snode_t* snode1, snode_t* snode_next)
+{
+  snode1->next = snode_next;
+}
+
+void snode_set_str(snode_t* snode , char* string)
+{
+  snode -> data = (char *) malloc (strlen(string) * sizeof(char) + 1);
+    strcpy(snode -> data , string);
+
+}
+
+snode_t* snode_get_next(snode_t* snode) //n1
+{
+  return snode->next;
+
+}
+
+
+char* snode_get_str(snode_t* snode)
+{
+  //char* getStr = snode->str;
+  //getStr -> str = l->front->str;
+  return snode->data;
+  
 }

@@ -8,16 +8,16 @@
 typedef struct slist {
   struct snode *front; // front node
   struct snode *back;  // back node
+  
 }slist_t;
 
-typedef struct snode {
+/*typedef struct snode {
   //TODO: change str to dynamic allcoation
-  void * data;
+  char * str;
   struct snode *next;
-  
-}snode_t;
 
-
+}snode_t;*/
+//
 /**
  * Allocates new slist dynamically.
  * 
@@ -40,9 +40,8 @@ slist_t *slist_create()
 snode_t* slist_add_back(slist_t *l, char *str)
 {
 
-    snode_t * newNode = (snode_t*) calloc (1,sizeof(snode_t));
-    newNode -> data = (char *) malloc (strlen(str) * sizeof(char) + 1);
-    strcpy(newNode -> data , str);
+    snode_t * newNode = (snode_t*) calloc (1,sizeof(slist_t)); //set next 
+    snode_set_str(newNode , str);
 
    if(l->back == NULL)
    {
@@ -53,7 +52,7 @@ snode_t* slist_add_back(slist_t *l, char *str)
 
    if(l->front != NULL)
    {
-       l->back->next = newNode;
+       snode_set_next(l->back , newNode);
        l->back = newNode;
    }
 
@@ -72,10 +71,12 @@ snode_t* slist_add_back(slist_t *l, char *str)
  */
 snode_t* slist_add_front(slist_t *l, char *str)
 {
-  snode_t * newNode = (snode_t *) malloc (sizeof(snode_t));
-  newNode -> data = (char *) malloc (strlen(str) * sizeof(char) + 1);
-  strcpy(newNode -> data, str);
-  newNode -> next = l -> front;
+  snode_t * newNode = (snode_t *) malloc (sizeof(slist_t)); 
+  snode_set_str(newNode , str);
+  //newNode -> str = (char *) malloc (strlen(str) * sizeof(char) + 1);
+  //strcpy(newNode -> str, str);
+  snode_set_next(newNode , l->front);
+  //newNode -> next = l -> front;
   l -> front = newNode;
 
   return newNode;
@@ -92,14 +93,14 @@ snode_t* slist_find(slist_t *l, char *str)
   snode_t * listfind = l->front;
   
   while (listfind != NULL)
-  {
-    if (strcmp(listfind->data, str) == 0)
+  { 
+    if (strcmp(snode_get_str(listfind), str) == 0)
     {
       return listfind;
     }
-    else if (strcmp(listfind->data, str) != 0)
+    else if (strcmp(snode_get_str(listfind), str) != 0)
     {
-      listfind = listfind -> next;
+      listfind = snode_get_next(listfind);
     }
   }
   listfind = NULL;
@@ -121,8 +122,10 @@ void slist_destroy(slist_t *l)
   snode_t * listdestroy;
   while (now != NULL)
   {
-    listdestroy = now -> next;
-    free (now->data);
+    listdestroy = snode_get_next(now);
+                          //listdestroy = now -> next;
+    free(snode_get_str(now));
+                          //free (now->str);
     free(now);
     now = listdestroy;
   }
@@ -139,10 +142,10 @@ void slist_traverse(slist_t *l){
   snode_t * traverse = l->front;
   while (traverse != NULL )
     {
-
-        printf("%s\n", (char *)traverse->data);
-       
-        traverse = traverse -> next;
+        printf("%s\n", snode_get_str(traverse));
+        //printf("%s\n", traverse->str);
+       traverse = snode_get_next(traverse);
+        //traverse = traverse -> next;
     }
 
 
@@ -161,7 +164,8 @@ uint32_t slist_length(slist_t *l)
   while (pcount != l->back)
     {
       count++;
-      pcount = pcount -> next;
+      //pcount = pcount -> next;
+      pcount = snode_get_next(pcount);
     }
   return count;
 }
@@ -178,23 +182,61 @@ void slist_delete(slist_t *l, char * str) //change return type
     snode_t * pred = l->front;
     snode_t* temp = NULL;
 
-    while(pred->next != NULL)
+    //while(pred->next != NULL)
+    while(snode_get_next(pred) != NULL)
     {
-        if(strcmp(pred->next->data, str) == 0)
+        //if(strcmp(pred->next->str, str) == 0)
+        if(strcmp(snode_get_str(snode_get_next(pred)), str) == 0)
         {
-            temp = pred->next;
-            pred->next = pred->next->next;
-            free(temp->data);
-            free(temp);
+                                         //temp = pred->next;
+              temp = snode_get_next(pred);
+        
+                              //pred->next = pred->next->next;
+                snode_set_next(pred , snode_get_next(temp));
+              //pred = snode_get_next(snode_get_next(pred));
+                                          //free(temp->str);
+               free(snode_get_str(temp));
+               free(temp);
       
             
 
         }
         else 
         {
-            pred = pred->next;
+            pred = snode_get_next(pred);
 
         }
 
     }
 }
+
+
+
+snode_t * slist_get_front(slist_t *l)
+{
+  snode_t * front = l->front;
+  return front;
+}
+
+snode_t * slist_get_back(slist_t *l)
+{
+  snode_t * back = l->front;
+  while (back != NULL )
+  {
+    if (snode_get_next(back) == NULL)
+    {
+      back = l->back;
+    }
+    else
+    {
+    back = snode_get_next(back);
+    }
+  }
+  //printf("%s" , l->back->str);
+  return l->back;
+}
+
+
+
+
+

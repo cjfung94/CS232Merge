@@ -99,7 +99,12 @@ uint32_t slist_length(struct slist *l);
  * @parap str pointer to a string
  * @return struct snode* or NULL if no match
  */
-void slist_delete(struct slist *l, char *str);
+void slist_delete(struct slist* l, char* str);
+
+struct snode* slist_get_front(struct slist* l);
+
+struct snode* slist_get_back(struct slist* l);
+
 
 
 #endif /* _slist_H_ */
