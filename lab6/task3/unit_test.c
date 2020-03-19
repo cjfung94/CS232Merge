@@ -190,7 +190,7 @@ test_list_delete_at() {
   // Assertions
   assert(3 == slist_length(list));
 
-  slist_delete_at(list, 1);
+  slist_delete_at(list, 2);
   assert(2 == slist_length(list));
 
   node_t * a = slist_get_front(list);
