@@ -11,10 +11,17 @@ typedef struct snode {
 }snode_t;
 
 snode_t *snode_create(char *s) 
+<<<<<<< HEAD
 {   
     
     snode_t * space = (snode_t *) malloc (sizeof(snode_t));
    
+=======
+{
+
+    snode_t * space = (snode_t *) malloc (sizeof(snode_t));
+
+>>>>>>> galmerge/master
     space -> str = (char *) malloc (strlen(s) * sizeof(char) + 1);
     strcpy(space -> str, s);
     space -> next = NULL;//TODO: implement snode_create, change the prototype to

@@ -32,6 +32,10 @@ test_list_add_back() {
   slist_add_back(list, "a");
   slist_add_back(list, "b");
   slist_add_back(list, "c");
+<<<<<<< HEAD
+=======
+  
+>>>>>>> galmerge/master
 
   // Assertions
   snode_t *a, *b, *c;
@@ -62,6 +66,7 @@ test_list_add_front() {
   slist_add_front(list, "b");
   slist_add_front(list, "c");
 
+<<<<<<< HEAD
   //printf("%d" , slist_length(list)); ---------------------------------testing length-----------------
 
   //slist_traverse(list); //------------------------------------------------I put this here---------------ERASE WHEN DONE--------------------------
@@ -70,6 +75,16 @@ test_list_add_front() {
   c = slist_get_front(list);
  assert(strcmp(snode_get_str(c), "c") == 0);
 
+=======
+  //slist_traverse(list); //------------------------------------------------I put this here---------------ERASE WHEN DONE--------------------------
+
+  snode_t *a, *b, *c;
+  
+  c = slist_get_front(list);
+ assert(strcmp(snode_get_str(c), "c") == 0);
+
+
+>>>>>>> galmerge/master
   a = slist_get_back(list);
   assert(strcmp(snode_get_str(a), "a") == 0);
 
@@ -134,11 +149,19 @@ test_list_delete() {
   assert(strcmp(snode_get_str(c), "c") == 0);
   assert(c == snode_get_next(a));
   assert(NULL == snode_get_next(c));
+<<<<<<< HEAD
+=======
+  
+  
+>>>>>>> galmerge/master
 
   slist_delete(list, "a");
   //slist_traverse(list); //-------------------------delete later-----------------------
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> galmerge/master
   assert(1 == slist_length(list)); //stops here
 
   c = slist_get_front(list);
@@ -146,15 +169,23 @@ test_list_delete() {
   assert(c == slist_get_back(list));
   assert(NULL == snode_get_next(c));
 
+<<<<<<< HEAD
 
   slist_delete(list, "c");
  
   
+=======
+  slist_delete(list, "c");
+>>>>>>> galmerge/master
 //printf("%d" , slist_length(list)); //---------------------------------------delete---------------------------
 //slist_traverse(list); //-------------------------delete later-----------------------
 
   assert(0 == slist_length(list));
+<<<<<<< HEAD
   assert(NULL == slist_get_front(list));
+=======
+ assert(NULL == slist_get_front(list));
+>>>>>>> galmerge/master
   assert(NULL == slist_get_back(list));
 
   slist_destroy(list);
