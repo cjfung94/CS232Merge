@@ -2,7 +2,7 @@
 #include "snode.h"
 #include <string.h>
 #include <stdlib.h>
-
+//
 typedef struct snode {
   //TODO: change str to dynamic allcoation
   char * str;

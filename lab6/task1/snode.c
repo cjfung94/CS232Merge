@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 typedef struct snode {
-  //TODO: change str to dynamic allcoation
+  //TODO: change str to dynamic allcoation/
   char * str;
 
   struct snode *next;

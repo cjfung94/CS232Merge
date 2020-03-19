@@ -24,7 +24,7 @@ test_list_node_new() {
 
 static void
 test_list_add_back() {
-  // Setup, think about it, why 3 nodes?
+  // Setup, think about it, why 3 nodes?//
   // because this tests front, middle, and end
   list_t *list = slist_create();
 
@@ -111,7 +111,7 @@ test_list_find_at() {
 
   slist_destroy(list);
 }
-//
+
 static void
 test_list_find() { 
   list_t *list = slist_create();
@@ -189,7 +189,7 @@ test_list_delete_at() {
   // Assertions
   assert(3 == slist_length(list));
 
-  slist_delete_at(list, 2);
+  slist_delete_at(list, 1);
   assert(2 == slist_length(list));
 
   node_t * a = slist_get_front(list);

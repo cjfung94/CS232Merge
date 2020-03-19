@@ -4,7 +4,6 @@
 #include <string.h>
 #include "slist.h"
 
-// Helpers
 
 #define test(fn) \
 	puts("... \x1b[33m" # fn "\x1b[0m"); \

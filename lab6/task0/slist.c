@@ -10,7 +10,7 @@ typedef struct slist {
   struct snode *back;  // back node
   
 }slist_t;
-
+//
 /*typedef struct snode {
   //TODO: change str to dynamic allcoation
   char * str;

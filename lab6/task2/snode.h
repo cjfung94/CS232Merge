@@ -19,5 +19,5 @@ snode_t* snode_get_next(snode_t* snode);
 void snode_set_next(snode_t* snode1, snode_t* snode_next);
 void snode_set_str(snode_t* snode , char* string);
 
- 
+ //
  #endif

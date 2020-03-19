@@ -19,7 +19,7 @@ typedef struct slist {
 
 }snode_t;*/
 //
-/**
+/*
  * Allocates new slist dynamically.
  * 
  * @return pointer to the list

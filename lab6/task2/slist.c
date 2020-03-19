@@ -7,7 +7,7 @@
 
 typedef struct slist {
   struct snode *front; // front node
-  struct snode *back;  // back node
+  struct snode *back;  // back node/
   int size;
   
 }slist_t;

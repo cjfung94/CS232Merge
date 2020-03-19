@@ -13,7 +13,7 @@
 typedef struct snode node_t;
 typedef struct slist list_t;
 
-// Tests
+// Test
 static void
 test_list_node_new() {
   char *val = "some value";

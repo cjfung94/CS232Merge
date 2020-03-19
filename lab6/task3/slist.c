@@ -16,7 +16,6 @@ typedef struct slist {
   //TODO: change str to dynamic allcoation
   char * str;
   struct snode *next;
-
 }snode_t;*/
 //
 /**
@@ -198,7 +197,6 @@ uint32_t slist_length(slist_t *l)
 {
   /*int count = 0;
   snode_t * pcount = l->front;
-
   while (pcount != NULL)
     {
       count++;
@@ -362,4 +360,3 @@ void slist_delete_at(slist_t *l, int index)
 
 
 }
-
