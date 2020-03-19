@@ -19,8 +19,7 @@ test_list_node_new() {
   char *val = "some value";
   node_t *node = snode_create(val);
   assert(strcmp(snode_get_str(node), val)==0);
-  free(snode_get_str(node));
-  free(node);
+  snode_destroy(node);
 }
 
 static void
@@ -95,7 +94,6 @@ test_list_find_at() {
   b = slist_find_at(list, 1);
   c = slist_find_at(list, 2);
 
-  
   // Assertions
   assert(strcmp(snode_get_str(a), "a") == 0);
   assert(strcmp(snode_get_str(b), "b") == 0);

@@ -10,35 +10,31 @@
 	puts("... \x1b[33m" # fn "\x1b[0m"); \
 	test_##fn();
 
-/*typedef struct snode snode_t;
-typedef struct slist slist_t;*/
+typedef struct snode node_t;
+typedef struct slist list_t;
 
 // Tests
 static void
 test_list_node_new() {
   char *val = "some value";
-  snode_t *node = snode_create(val);
+  node_t *node = snode_create(val);
   assert(strcmp(snode_get_str(node), val)==0);
-  free(snode_get_str(node)); //added
-  free(node);
+  snode_destroy(node);
 }
 
 static void
 test_list_add_back() {
   // Setup, think about it, why 3 nodes?
   // because this tests front, middle, and end
-  slist_t *list = slist_create();
+  list_t *list = slist_create();
+
   // a b c
   slist_add_back(list, "a");
   slist_add_back(list, "b");
   slist_add_back(list, "c");
-<<<<<<< HEAD
-=======
-  
->>>>>>> galmerge/master
 
   // Assertions
-  snode_t *a, *b, *c;
+  node_t *a, *b, *c;
   a = slist_get_front(list);
   assert(strcmp(snode_get_str(a), "a") == 0);
 
@@ -53,38 +49,23 @@ test_list_add_back() {
   assert(NULL == snode_get_next(c));
   
   //slist_destroy calls snode_destroy
-  slist_destroy(list); 
+  slist_destroy(list);
 }
 
 static void
 test_list_add_front() {
   // Setup
-  slist_t *list = slist_create();
+  list_t *list = slist_create();
 
   // c b a
   slist_add_front(list, "a");
   slist_add_front(list, "b");
   slist_add_front(list, "c");
 
-<<<<<<< HEAD
-  //printf("%d" , slist_length(list)); ---------------------------------testing length-----------------
-
-  //slist_traverse(list); //------------------------------------------------I put this here---------------ERASE WHEN DONE--------------------------
-
-  snode_t *a, *b, *c;
+  node_t *a, *b, *c;
   c = slist_get_front(list);
- assert(strcmp(snode_get_str(c), "c") == 0);
+  assert(strcmp(snode_get_str(c), "c") == 0);
 
-=======
-  //slist_traverse(list); //------------------------------------------------I put this here---------------ERASE WHEN DONE--------------------------
-
-  snode_t *a, *b, *c;
-  
-  c = slist_get_front(list);
- assert(strcmp(snode_get_str(c), "c") == 0);
-
-
->>>>>>> galmerge/master
   a = slist_get_back(list);
   assert(strcmp(snode_get_str(a), "a") == 0);
 
@@ -94,21 +75,20 @@ test_list_add_front() {
   assert(strcmp(snode_get_str(b), "b") == 0);
   assert(a == snode_get_next(b));
   assert(NULL == snode_get_next(a));
-
-  
-  slist_destroy(list); 
+ 
+  slist_destroy(list);
 }
 
 static void
 test_list_find() { 
-  slist_t *list = slist_create();
+  list_t *list = slist_create();
 
   // a b c
   slist_add_back(list, "a");
   slist_add_back(list, "b");
   slist_add_back(list, "c");
 
-  snode_t *a, *b, *c, *z;
+  node_t *a, *b, *c, *z;
   a = slist_find(list, "a");
   b = slist_find(list, "b");
   c = slist_find(list, "c");
@@ -126,7 +106,7 @@ test_list_find() {
 static void
 test_list_delete() {
   // Setup
-  slist_t *list = slist_create();
+  list_t *list = slist_create();
 
   // a b c
   slist_add_back(list, "a");
@@ -137,55 +117,27 @@ test_list_delete() {
   assert(3 == slist_length(list));
 
   slist_delete(list, "b");
-  //slist_traverse(list); //--------------------------------delete-------------------------
   assert(2 == slist_length(list));
 
-  //slist_traverse(list); //--------------------------------------DELETE LATER-----------------------------------------
-
-  snode_t * a = slist_get_front(list);
+  node_t * a = slist_get_front(list);
   assert(strcmp(snode_get_str(a), "a") == 0);
 
-  snode_t * c = slist_get_back(list);
+  node_t * c = slist_get_back(list);
   assert(strcmp(snode_get_str(c), "c") == 0);
   assert(c == snode_get_next(a));
   assert(NULL == snode_get_next(c));
-<<<<<<< HEAD
-=======
-  
-  
->>>>>>> galmerge/master
 
   slist_delete(list, "a");
-  //slist_traverse(list); //-------------------------delete later-----------------------
-
-<<<<<<< HEAD
-
-=======
->>>>>>> galmerge/master
-  assert(1 == slist_length(list)); //stops here
+  assert(1 == slist_length(list));
 
   c = slist_get_front(list);
   assert(strcmp(snode_get_str(c), "c") == 0);
   assert(c == slist_get_back(list));
   assert(NULL == snode_get_next(c));
 
-<<<<<<< HEAD
-
   slist_delete(list, "c");
- 
-  
-=======
-  slist_delete(list, "c");
->>>>>>> galmerge/master
-//printf("%d" , slist_length(list)); //---------------------------------------delete---------------------------
-//slist_traverse(list); //-------------------------delete later-----------------------
-
   assert(0 == slist_length(list));
-<<<<<<< HEAD
   assert(NULL == slist_get_front(list));
-=======
- assert(NULL == slist_get_front(list));
->>>>>>> galmerge/master
   assert(NULL == slist_get_back(list));
 
   slist_destroy(list);
