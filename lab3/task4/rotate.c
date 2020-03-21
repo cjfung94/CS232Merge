@@ -20,7 +20,7 @@ int main(int argc, char ** argv) {
     //TO-DO check if there are 4 inputs.
     //print out an error message if there are not enough inputs.
     //hint: use argc
-    if(argc < 5 || argc > 5)
+    if(argc < 5)
     {
       puts("Error: rotate needs four numbers");
       exit(0);
