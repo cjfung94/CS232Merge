@@ -40,7 +40,7 @@ int main()
 
 int is_prime(int n) {
 	//if n is divisible by any number greater or equal to 2 and less than n, then n is not prime.
-int i;
+int i = 1;
 	for (int i = 2; i < n; i++) {
 		if (n%i == 0) {
 			return(0);
