@@ -25,7 +25,7 @@ void get_bits(unsigned x,
       bit = (x >> (start+i)) & 1;
 
       a[i] = bit;
-
+//
       /*if(x<<start+i == 1)
       {
         a[i] = 1;

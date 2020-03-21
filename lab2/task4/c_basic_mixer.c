@@ -26,7 +26,7 @@ void conditionmixer() {
 	int i = 6;
 	char ch = 'm';
 	
-	printf("3==4 = %d\n", 3==4);
+	printf("3==4 = %d\n", 3==4);//
 	//3 == 4 = 0
 	printf("3==3 = %d\n", 3==3);
 	//3 == 3 = 1
