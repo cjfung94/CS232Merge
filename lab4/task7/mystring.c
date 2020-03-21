@@ -67,7 +67,7 @@ mystring_t *mystring_new() {
 	}
 
 	retval -> size = 1;
-	retval -> data = (char *) malloc (sizeof(char));
+	retval -> data = (char *) malloc ( sizeof(char) + 1);
 	if(retval -> data == NULL){
 		perror("Memory Error");
 		return NULL;
@@ -116,16 +116,24 @@ void mystring_cat(mystring_t *s, char *s2) {
 	/* YOUR CODE HERE*/
 	int i = 0;
 	int d = 0;
-
-	for (i = 0; s->data [i] != '\0'; i++)
+	if (s->data[0] == ' ' )
 	{
-		s -> data[i] = s -> data[i];
+		for (i = 0; s2[i]; i++)
+		{
+			s->data[i] = s2[i];		
+		}
 	}
-	for (d = 0; s2[d] != '\0'; d++)
+	else
 	{
-		s->data[i + d] = s2[d];
+		for (i = 0; s->data[i]; i++)
+		{
+			i++;
+		}
+		for (d = 0; s2[d]; d++)
+		{
+			s->data[i + d] = s2[d];
+		}
 	}
-	s->data [i+d+1] = '\0';
 }
 
 /* Set a value in the mystring. If the extra memory allocation fails, call

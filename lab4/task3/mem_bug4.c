@@ -11,13 +11,13 @@ mytype_t ** allocate(int n){
   int i;
 
   mytypes = calloc(n,sizeof(mytype_t *));
-  for(i=0;i<n;i++){
+  for(int i=0;i<n;i++){
     mytypes[i] = malloc(sizeof(mytype_t));
     //printf("%d\n" , i);
 
     mytypes[i]->a =  calloc(i+1,sizeof(int));
 
-    for(j=0;j<i+1;j++){
+    for(int j=0;j<i+1;j++){
       mytypes[i]->a[j] = j*10;
     }
 
