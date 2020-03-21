@@ -2,7 +2,7 @@
 Midpoint A:
 
 
-I used x = 2147483647 [0b01111 1111 1111 1111 1111 1111 1111 1111] signed and y = -3 [0b111] signed
+I used x = 2147483647 [0b1111 1111 1111 1111 1111 1111 1111 1111] signed and y = -3 [0b111] signed
 to fail midpoint_A test. When the math is actually done you get this:
 2147483647 + ((-3-2147483647) / 2) --> 2147483647 + ((-2147483650) / 2)).
 In binary this is [0b01111 1111 1111 1111 1111 1111 1111 1111] + (([0b111] - [0b01111 1111 1111 1111 1111 1111 1111 1111]) / [0b10])
