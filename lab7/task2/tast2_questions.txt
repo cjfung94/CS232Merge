@@ -1,8 +1,31 @@
 1.What instruction is “int a, b, c, d;” converted to? 
 
+ subl $16 , %esp
+
 2.Does “int a, b, c, d;” shrink or grow the stack? How many bytes are allocated on stack for a, b, c, and d? Explain them using instruction from question 1.
+
+ This grows the stack (conceptually we are adding data to main therefore we need to create more space for it to go).
+ The %esp register holds the address to the top of the stack. Subtracting '16' from the address currently in %esp now 
+ changes the value of the address in %esp to a 'lower' address. We say lower because the stack grows from high to low therefore
+ the top of the stack holds the lowest address. In terms of bytes, each integer is 4 bytes on a 32-bit machine. Consider the 
+ instruction subl $16 , %esp. The immediate value is 16 because we have 4 integers, which are 4 bytes each therefore, we are moving
+ the address in register %esp to an address 16 bytes away in order to make room for each integer declared. 
 
 3.What instruction is “b=2;” converted to? How is the address of variable b formed in the instruction?
 
+ The instruction for "b=2" converts to movl $2 , -8(%ebp). The %ebp register holds the address to the bottom of the stack. In
+ a stack frame the bottom does not change unlike the top of the stack frame which is constantly moving. Register %ebp holds the address
+ that points to where main was declared considering that was the first instruction in the stack frame. The next addresses are 4 bytes
+ away from eachother and increment in factors of 4 from the bottom of the stack considering we declared integers. The first declaration
+ "a=1" is 4 bytes away from %ebp. Now, for "b=2", we are moving another 4 bytes away from the address that refers to a whch is also 
+ 8 bytes away from the address that refers to main. That is why the instruction movl $2 , -8(%ebp) translates to "b=2".
+
 4.Based on the instructions converted from four assignments, can we claim the declaration order determines the allocation order? For instance, a is declared before b, does it mean a is to be allocated before b on stack? Verify your theory by changing the declaration to “int a, c, b, d;”
+
+ The declaration has nothing to do with the allocation order. The compiler simply reads that 4 integers were declared so it
+ immediately allocates enough room to fit 4 integers. The address in the register %esp (which points to the top of the stack)
+ will move 16 bytes away from the 'previous top' of the stack regardless of whether the order of the declaration changes. We could
+ change the names completely to int z,x,c,v and the instruction will remain movl $16, %esp. 4 integers were declared and the correct
+ amount of bytes needs to be allocated in order to make room, that's all.
+ 
 
