@@ -1,4 +1,25 @@
 1.What instructions evaluate “a>6”?
+ cmpl $6,-4(%ebp)
+
+ This instruction compares the logical expression. It is comparing the immediate value of 6 and the value at the address that is 
+ 4 bytes from the bottom of the stack which is a.   
+
+
 2.What happens if we delete the “jmp” instruction?
+
+ If we remove the "jmp" statement, the control flow will continue working its way down altering the output of the program. The jmp 
+ instruction allows the program to "leave" after the arithmetic in either the if OR else statement has been executed. If the conditional 
+ expression "a>6" is true, the control flow will continue down and do the addition as expected. If we removed the next jmp intruction,
+ the compiler will execute the next instruction which then does the substraction (or addition of a negative) changing the output and 
+ expectation of the original program. That is simply how if statements work. If(true), then do something OR do something else - the idea 
+ is to do one or the other, not both. 
+
+
 3.Can you rewrite the condition with “jg” in place of “jle”? Why or why not?
+
+ No, they are opposites. The original instruction "jle" refers to the "else" statement (if the condition a>6 is false
+ which also means the number is less than or equal to). The original instruction jle allows the compiler to jump to the 
+ proper and expected arithmetic for that statement which is c -= 2. If you were to rewrite the condition with jg, that 
+ translates to jump if greater than. That would mean that if the "if statement" condition was true, it would jump
+ to this arithmetic which is not what the user is intending.  
 
