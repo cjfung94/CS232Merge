@@ -5,7 +5,7 @@ What instructions is “c=a+b;” converted to?
         movl %eax,-12(%ebp)
 
 
-        This falls the read - update - write. So first 'a' is read and stored in %eax. I know -4(%ebp) is referring to int a because
+        This follows the read - update - write. So first 'a' is read and stored in %eax. I know -4(%ebp) is referring to int a because
         it was 'initialized' first therefore it is 4 bytes away from the address at the bottom of the stack. The value 13 is now placed
         in register %eax. The value in %eax is now being updated using addition and the value of 'b'. I know this is referring to int b
         because it was 'initialized' after int a which makes it 4 bytes away from int a and 8 bytes away from the bottom of the stack. 
