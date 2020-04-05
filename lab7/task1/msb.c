@@ -30,52 +30,80 @@ int msb(int x) {
 	//                        |
 	//                        ep
 	// in which * is a wild card which could be 0 or 1                   
-	int w, ep, hw, mask,mask2;
+	int w, ep, hw, mask, mask2;
 
 	//int mask = 2147483647;
 	w=32; // Number of bits that might contain most significant 1
 	ep=0; // Rightmost bit that might contain most significant 1
-	mask = ~0 << w/2;
-	while(w>1) { //Narrow down to a single bit
+	
 
-	w = w/2;
-	hw = w;
+	mask = ~0 << w/2;
+	mask2 = ~(~0 << w/2);
+	//printf("%d\n", mask2);
+
+	while(w>1) { //Narrow down to a single bit
+	
+		w = w/2;
+		hw = w;
+
+	
+
+	
 
 		//TODO: Look at half the range of bits
 		//TODO: create a mask. 
 		// This mask is all one-bits in the left half of the range
-		printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",hw,ep);
-	if (ep == 0 && !(mask & x)) // goes into this if ep is not found and mask didn't find a 1 bit
-	{
-		mask2 = ~mask; // look at the right side or inverse = 0000 0000 0000 0000 1111 1111 1111 1111
-		mask = (mask2 << hw/2) & mask2; 
-		/* Compares 0000 0000 0000 0000 1111 1111 1111 1111 to
-		            0000 0000 1111 1111 1111 1111 0000 0000 
-		   ---------------------------------------------------
-		            0000 0000 0000 0000 1111 1111 0000 0000
-		 */
+		printf(" M= "); print_binary(mask); printf(" hw=%d ep=%d\n",hw,ep);
 
-	} 
-	else if (mask & x) // finds ep in the other half
+	if (mask & x) //Focus on left half
 	{
-	
-			ep = hw; // sets ep to hw
-		mask = mask << hw/2 & mask; 
-		/* 0000 0000 0000 0000 1111 1111 0000 0000
-		   0000 0000 0000 1111 1111 0000 0000 0000
-		   ----------------------------------------
-		   0000 0000 0000 0000 1111 0000 0000 0000
-		*/
+	/*	printf("M1L:");
+		print_binary(mask);
+		printf("\n");
+		printf("M2L:");
+		print_binary(mask2);
+		printf("\n"); */
+		if (mask & x && ep == 0)
+		{
+			ep = hw;
+		}
+		mask2 = mask >> hw/2 & mask;
+		mask = mask << hw/2 & mask ;
+
+	/*	printf("M1L:");
+		print_binary(mask);
+		printf("\n");
+		printf("M2L:");
+		print_binary(mask2);
+		printf("\n"); */
 	}
-
-	else
+	else if (mask2 & x) // focus on right half
 	{
-
-		mask2 = mask >> hw;
-		mask = mask2 & mask >> hw/2;
-
+	//	printf("%d\n", mask2);
+	
+	/*	printf("M1R:");
+		print_binary(mask);
+		printf("\n");
+		printf("M2R:");
+		print_binary(mask2);
+		printf("\n"); */
+		if (mask & x && ep == 0)
+		{
+			ep = hw;
+		}
+		mask = mask2 << hw/2 & mask2 ;
+		mask2 = mask2 >> hw/2 & mask2;
+	/*	printf("M1R:");
+		print_binary(mask);
+		printf("\n");
+		printf("M2R:");
+		print_binary(mask2);
+		printf("\n"); */
 		
-	} 
+		
+	//	printf("right");
+	}
+	
 
 
 
