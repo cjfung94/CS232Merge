@@ -1,3 +1,14 @@
 1.By searching the function name “strcmp” in the assembly text, what instruction calls strcmp?
+
+
+The instruction that calls strcmo is "call strcmp."
+
+
 2.Where is the password “secret” stored?
+
+Password holds a constant string therefore it is stored in the code section of the memory layout. 
+
+
+
+
 
