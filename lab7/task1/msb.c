@@ -45,7 +45,7 @@ int msb(int x) {
 	
 		w = w/2;
 		hw = w;
-
+ 
 	
 
 	
@@ -63,9 +63,9 @@ int msb(int x) {
 		printf("M2L:");
 		print_binary(mask2);
 		printf("\n"); */
-		if (mask & x && ep == 0)
+		if (mask & x)
 		{
-			ep = hw;
+			ep = hw + ep;
 		}
 		mask2 = mask >> hw/2 & mask;
 		mask = mask << hw/2 & mask ;
@@ -87,9 +87,9 @@ int msb(int x) {
 		printf("M2R:");
 		print_binary(mask2);
 		printf("\n"); */
-		if (mask & x && ep == 0)
+		if (mask & x)
 		{
-			ep = hw;
+			ep = hw + ep;
 		}
 		mask = mask2 << hw/2 & mask2 ;
 		mask2 = mask2 >> hw/2 & mask2;
