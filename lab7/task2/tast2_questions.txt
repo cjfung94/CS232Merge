@@ -13,7 +13,7 @@
 
 3.What instruction is “b=2;” converted to? How is the address of variable b formed in the instruction?
 
- The instruction for "b=2" converts to movl $2 , -8(%ebp). The %ebp register holds the address to the bottom of the stack. In
+ The instruction for "b=2" converts to movl $2 , -8(%ebp). The %ebp register holds the address to the bottom of the current stack frame. In
  a stack frame the bottom does not change unlike the top of the stack frame which is constantly moving. Register %ebp holds the address
  that points to where main was declared considering that was the first instruction in the stack frame. The next addresses are 4 bytes
  away from eachother and increment in factors of 4 from the bottom of the stack considering we declared integers. The first declaration
