@@ -2,7 +2,7 @@
  cmpl $6,-4(%ebp)
 
  This instruction compares the logical expression. It is comparing the immediate value of 6 and the value at the address that is 
- 4 bytes from the bottom of the stack which is a.   
+ 4 bytes from the bottom of the current stack frame which is a.   
 
 
 2.What happens if we delete the “jmp” instruction?
