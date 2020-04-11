@@ -23,3 +23,4 @@
  translates to jump if greater than. That would mean that if the "if statement" condition was true, it would jump
  to this arithmetic which is not what the user is intending.  
 
+JYM: it is possible to swap jg with jle, as long as you flip two code blocks too
