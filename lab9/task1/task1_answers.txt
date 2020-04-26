@@ -1,60 +1,64 @@
 Table for yi.trace when set index bits =4, block offset bit = 4 using direct map cache:
 
+//------------We put our analysis on the right side of the chart to keep it tidy
+
 ----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 ----------------------------------------------------------------   
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|	 	 			|
- L 110,1|	 	 			|
- L 210,1|	 	 			|
- M 12,1	|					|	 	 
+ L 10,1	|0b 0000 0001 0000 (index 1)	|   Miss                |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss because the cache is cold.	 
+ M 20,1	|0b 0000 0010 0000 (index 2)	|	Miss Hit            |Analysis: Offset takes 4 bits so set id  = 0b 0010. This is a cache miss hit because it is a modify instruction - There is nothing at that index for the load instruction, then it modifies the data, and it is a hit since the store compares the tag (which matches for that index) and proceeds. 
+ L 22,1	|0b 0000 0010 0010 (index 2)	|	Hit                 |Analysis: Offset takes 4 bits so set id  = 0b 0010. This is a cache hit because the tag matches the one already stores at that index.	 
+ S 18,1	|0b 0000 0001 1000 (index 1	 	|   Hit                 |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache hit because the tag matches the one already stores at that index.
+ L 110,1|0b 0001 0001 0000 (index 1)	|  Miss Eviction        |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss eviction because there is already data in index 1 although with a different tag therefore it evicts the previous loaded data and loads this one. 
+ L 210,1|0b 0010 0001 0000 (index 1) 	|  Miss Eviction        |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss eviction because there is already data in index 1 although with a different tag therefore it evicts the previous loaded data and loads this one.
+ M 12,1	|0b 0000 0001 0010				|  Miss Eviction Hit    |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss eviction hit because of the modify instruction. It is a miss eviction because there is already data in index 1 although with a different tag therefore it evicts the previous loaded data and loads this one. Now it is a hit because, now that is was loaded, it will read and store from here.	 
 -----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 4 using 2 lines per set:
 ----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 ---------------------------------------------------------------- 
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|					|	 	 
- L 110,1|					|	 	 
- L 210,1|					|	 	 
- M 12,1	|					|	 	 
+ L 10,1	| 0b 0000 0001 0000 (set 1)     |	 Miss 	            |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss because the cache is cold.	        
+ M 20,1	| 0b 0000 0010 0000 (set 2)     |	 Miss Hit 	        |Analysis: Offset takes 4 bits so set id  = 0b 0010. This is a miss hit because when it reads from the cache, the data is not originally there causing a miss, but with modify, it modifies the value in the cache and then writes back to memory so after it is modified and is looked at again in the cache, it is a hit before it is loaded back to memory
+ L 22,1	| 0b 0000 0010 0010 (set 2)     |	 Hit 	            |Analysis: Offset takes 4 bits so set id  = 0b 0010. This is a hit because in set 2 this tag matches the one that was already loaded - (item in the cache).
+ S 18,1	| 0b 0000 0001 1000 (set 1)     |	 Hit 	            |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a hit because in set 1, this tag matches the one that was already loaded - (item in the cache).
+ L 110,1| 0b 0001 0001 0000 (set 1)     |	 Miss 	            |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a miss because in set 1 there is no data loaded with that matching tag - (item not in cache).
+ L 210,1| 0b 0010 0001 0000 (set 1)     |	 Miss Eviction 	    |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a miss eviction because set 1 is full and the item is not in the cache with the matching tag so it evicts one line and replaces it. 
+ M 12,1	| 0b 0000 0001 0010 (set 1)     | 	 Miss Eviction Hit  |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss eviction hit because of the modify instruction. It is a miss eviction because there is already data in set 1 although with a different tag therefore it evicts the previous loaded data and loads this one. Now it is a hit because, now that is was loaded, it will read and store from here.	 
 ----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|					|	 	 
- L 110,1|					|	 	 
- L 210,1|					|	 	 
- M 12,1	|					|
+ L 10,1	| 0b 0000 0001 0000 (index 4)    |	 Miss 	 	        |Analysis: Offset takes 2 bits so set id  = 0b 0100. This is a cache miss because the cache is cold.
+ M 20,1	| 0b 0000 0010 0000 (index 8)    |	 Miss Hit 	        |Analysis: Offset takes 2 bits so set id  = 0b 1000. This is a miss hit because when it reads from the cache, the data is not originally there in index 8 causing a miss, but with modify, it modifies the value in the cache and then writes back to memory so after it is modified and is looked at again in the cache, it is a hit before it is loaded back to memory
+ L 22,1	| 0b 0000 0010 0010 (index 8)    |	 Hit 	            |Analysis: Offset takes 2 bits so set id  = 0b 1000. This is a hit because the item is in the cache at index 8 with the matching tag.
+ S 18,1	| 0b 0000 0001 1000 (index 3)    |	 Miss 	            |Analysis: Offset takes 2 bits so set id  = 0b 0110. This is a miss because the item at index 3 is not in the cache. 
+ L 110,1| 0b 0001 0001 0000 (index 4)    |   Miss Eviction      |Analysis: Offset takes 2 bits so set id  = 0b 0100. This is a cache miss eviction because the tags don't match at that index but there's something there so it's an eviction.
+ L 210,1| 0b 0010 0001 0000 (index 4)    |   Miss Eviction      |Analysis: Offset takes 2 bits so set id  = 0b 0100. This is a cache miss eviction because the tags don't match at that index but there's something there so it's an eviction.
+ M 12,1 | 0b 0000 0001 0010 (index 4)    |   Miss Eviction      |Analysis: Offset takes 2 bits so set id  = 0b 0100. This is a cache miss eviction hit because the load portion gives a miss because the tags don't match, the index already has something there so there's an eviction but there's a hit when the store portion is invoked.
 -----------------------------------------------------------------	 	 
 Table for dave.trace when set index bits =4, block offset bit = 4 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|					|	 	 
- S 18,4	|					|	 	 
- L 20,4	|					|	 	 
- S 28,4	|					|	 	 
- S 50,4	|					|	 	 
+ L 10,4	| 0b 0000 0001 0000 (index 1)   |   Miss               |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache miss because the cache is cold.	  
+ S 18,4	| 0b 0000 0001 1000 (index 1)   |	Hit   	           |Analysis: Offset takes 4 bits so set id  = 0b 0001. This is a cache hit because the tag matches what's at that index.	  
+ L 20,4	| 0b 0000 0010 0000 (index 2)   |	Miss  	           |Analysis: Offset takes 4 bits so set id  = 0b 0010. This is a cache miss there's nothing in that index.	  
+ S 28,4	| 0b 0000 0010 1000 (index 2)   |	Hit  	           |Analysis: Offset takes 4 bits so set id  = 0b 0010. This is a cache hit because the tag matches what's at that index.	  
+ S 50,4	| 0b 0000 0101 0000 (index 5)   |  	Miss               |Analysis: Offset takes 4 bits so set id  = 0b 0101. This is a cache miss because the cache is cold.	  
 -----------------------------------------------------------------
 
 Table for dave.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|					|	 	 
- S 18,4	|					|	 	 
- L 20,4	|					|	 	 
- S 28,4	|					|	 	 
- S 50,4	|					|
-----------------------------------------------------------------	 	 
+ L 10,4	| 0b 0000 0001 0000 (index 4)     |   Miss 	          |Analysis: Offset takes 2 bits so set id  = 0b 0100. This is a cache miss because the cache is cold.	 
+ S 18,4	| 0b 0000 0001 1000 (index 6)     |   Miss 	          |Analysis: Offset takes 2 bits so set id  = 0b 0110. This is a cache miss because there's nothing in that index.
+ L 20,4	| 0b 0000 0010 0000 (index 8)     |   Miss 	          |Analysis: Offset takes 2 bits so set id  = 0b 1000. This is a cache miss because there's nothing in that index. 
+ S 28,4	| 0b 0000 0010 1000 (index 10)    |   Miss            |Analysis: Offset takes 2 bits so set id  = 0b 1010. This is a cache miss because there's nothing in that index.  	 
+ S 50,4	| 0b 0000 0101 0000 (index 4)     |   Miss Eviction   |Analysis: Offset takes 2 bits so set id  = 0b 0100. This is a cache miss eviction because there's nothing that matches the tag at the index but there's something there, so it's an eviction. 	  
+----------------------------------------------------------------	 	  	 
+
+	 
