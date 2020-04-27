@@ -1,15 +1,30 @@
 #1: What function does the line i = (addr >> 2) & 7; serve in the simulation?
-It simulates ignoring the 2 bit ofset, then comparing the 3 bit index with 7 to see what the index ID is.
+It simulates shifting the 2 bits that represent offset. It shifts two because there is 1 word per line so the bottom
+two bits will be 00. The number 7 in binary = 0111 and is bitwise 'and' compared with the 3 bit index to set the index ID and the 'i' is 
+then used for the array "tag[8]" to begin the simulation. 
+
+
 
 #2: Compile and execute the direct-mapped cache simulator given in the task. Report the final number of hits and accesses output by the code. Also, based on the pattern of cache hits, estimate the hit rate of the given trace in the steady state (once the compulsory misses are accounted for).
 Hits : 68
 Accesses : 103
 Hit Rato : 0.660194
 
-Compulsory State:
-Hits : 76
-Accessess : 103
-Hit Ratio: 0.737864
+    The hit rate can be calculated by : cache hits / (cache hits + cache misses) BUT we are calculating this for the steady state
+    which means we have to take into account the compulsory misses - the first memory reference to a memory. After looking
+    through the trace file, and find a pattern of 4 hits 1 miss including the first 8, there are a total of 27 compulsory misses.
+
+    So we can calculate the hit rate this way : cache hits / (cache hits + cache misses) - compulsory misses
+
+                                              = 68 / (103) - 27
+                                              = 68 / 76
+                                              = 0.8947368
+
+
+
 #3: Our implementation of a simple, direct-mapped cache simulator only uses and maintains the tags in its simulation. Why is this enough to get a working example of cache behavior?
-This is because it simulates actual cache behavior as far as the theory and concept of it. Where it would load up the cache, and utilize it as per necessary while replacing the information in it
-to satisfy the needs of the program.
+    Typically an entire cache block is compared in order to determine hits/misses. In this simple direct-mapped cache simulator, 
+    it is enough to get a working example of cache behavior by maintaining the tag, considering every lines stores a tag (part of
+    actual address), considering the index ID is already taken care of when finding 'i.' The variable 't,' which is initialized by
+    bitwise 'or' compared with decimal 31 and the address, allows for the simulation to compare the tag with t (which is essentially what 
+    a cache does (after determining cache line) compares the tags).
