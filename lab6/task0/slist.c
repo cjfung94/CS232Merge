@@ -223,11 +223,11 @@ void slist_delete(slist_t *l, char * str) //change return type
         if (strcmp(snode_get_str(l->front), str) == 0)
     {
       snode_t * first = l->front;
-      snode_t * second = NULL;
-      second = first;
-      l->front = snode_get_next(first);
-      free(snode_get_str(second));
-      free(second);
+      //snode_t * second = NULL;
+     // second = first;
+      l->front = snode_get_next(l->front);
+      free(snode_get_str(first));
+      free(first);
       
       l->back = l->front;
     }

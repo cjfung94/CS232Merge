@@ -69,6 +69,10 @@ int main(int argc, char *argv[]) {
   snode_destroy(n2);
   snode_destroy(n1);*/
   
+  snode_destroy(n3);
+  snode_destroy(n2);
+  snode_destroy(n1);
+  
   
 
   return 0;
