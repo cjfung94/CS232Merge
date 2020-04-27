@@ -1,3 +1,30 @@
 #1: Explain the newly-added function mruUpdate(), briefly outlining its purpose, how it works, and why we would want or need such a function in our fully-associative cache simulator.
+    
+    A fully associative cache has no restriction to where the data is inputted and it is determined by access pattern. Considering this, 
+    this update method is necessary. The method mruUpdate() works like this: First the mru[] is initialized as such
+    mru[8] = {7,6,5,4,3,2,1,0} and it takes an index as a parameter. The first for loop increments i in order to properly update the 
+    correct data in the while loop beneath it. For instance, if the parameter index was 2, the for loop would loop until mru[i] = index.
+    In this example (if the index were 2), i would increment to 5 (because the number 2 is at index 5 in the mru[8] array), so only then
+    will the for loop break. Now i holds the value 5 and enters the while loop. The while loop will continue to loop as the value of 
+    i decreases. The line "mru[i] = mru[i-1]" is essentially shifting the previous calls "down the line" so that the last accessed the
+    furthest in the past is shifted towards the end. This is a form of line replacement. The index that was just called (in this 
+    example is 2) is then moved to the top. This is needed in a fully associative cache for line replacemet as mentioned because 
+    the data can be anywhere in the cache - this form of line replacement allows some form of organization. Removing a line based on
+    its relevance/last used. 
 
 #2: Compile and execute the fully-associative cache simulator in the task. Report the final number of hits and accesses output by the code. Based on the pattern of cache hits, estimate the hit rate of the given trace in the steady state (once the compulsory misses are accounted for).
+    
+    The final number of hits = 76
+    The final number of accesses = 103
+    The hit ratio that was outputted = 0.737864 
+
+    The hit rate can be calculated by : cache hits / (cache hits + cache misses) BUT we are calculating this for the steady state
+    which means we have to take into account the compulsory misses - the first memory reference to a memory. After looking
+    through the trace file, and find a pattern of 4 hits 1 miss including the first 8, there are a total of 27 compulsory misses.
+
+    So we can calculate the hit rate this way : cache hits / (cache hits + cache misses) - compulsory misses
+
+                                              = 76 / (103) - 27
+                                              = 76 / 76
+                                              = 1
+
