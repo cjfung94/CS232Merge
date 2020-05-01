@@ -11,7 +11,7 @@ main()
 {
     int i, j, k;
 
-    for (i = 0; i < Dim; i++)		/* first initialize the matrices */
+    for (i = 0; i < Dim; i++)		/* first initialize the matrices/ */
 	for (j = 0; j < Dim; j++) {
 	     A[i][j] = i;
 	     B[i][j] = j;
