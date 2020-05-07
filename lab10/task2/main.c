@@ -18,9 +18,10 @@
 #include <stdlib.h>
 void get_valid_option(int *n) {
 	int r = scanf("%d", n);
-	while (r!=1 || *n<1 || *n>3) {
+	while (r != 1 || *n < 0 || *n > 3) {
 		printf("\nPlease enter a number from 1 to 3: ");
 		r = scanf("%d", n);
+
 	}
 
 }
@@ -51,10 +52,13 @@ int main() {
 
 		printf("\n Please enter your option:");
 		get_valid_option(&option);
+		
 
 		switch (option) {
 		case 1: {
+		
 			asciimation_play(ascm);
+			
 			break;
 		}
 		case 2: {

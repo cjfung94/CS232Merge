@@ -11,30 +11,64 @@
 * 04/16/2019, By Jun Yuan-Murray, modified for CS232, Pace University, NY
 * 04/29/2020, By Jun Yuan-Murray, modified for CS232, Pace University, NY
 ******************************************************/
+#define _GNU_SOURCE
 #include "frame.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "snode.h"
+
+
+
+
+
+
 static void load_frame(frame_t *f, char *path){
 	// TODO:your code here
 	// path is the pathname to an ascii file, we have to open the ascii file, and read the content
 	// in line by line and store it in the frame->content
 	// here is an example of reading line-by-line from path
-	// FILE * fp;
-    	// char * line = NULL; 
-	//fp = fopen(path, "r");
-    	//if (fp == NULL)
-        	//exit(EXIT_FAILURE);
+	 FILE * fp;
+    	 char * line = NULL; 
 
-    	//while ((read = getline(&line, &len, fp)) != -1) {
+		//char * trial = (char *) malloc (10000 * sizeof(char)+ 1);
+		f->content = (char *) malloc (sizeof(char) + 1);
+		fp = fopen(path, "r");
+
+    	if (fp == NULL)
+		{
+        	exit(EXIT_FAILURE);
+		}
+
+		size_t read = 0;
+		size_t len = 0;
+		int sum = 0;
+
+    	while ((read = getline(&line, &len, fp)) != -1) {
         	//printf("Retrieved line of length %zu:\n", read);
         	//printf("%s", line); //this line is NOT your code
 		//your task is not to print the line, instead, you need to save the line to
-		//frame->content
-    	//}
-	//fclose(fp);
+		//f->content
+		sum = sum + read;
+		f->content = (char *) realloc (f->content, sum * sizeof(char) + 1);
 
+		f->content = mystring_cat(f->content, line);
+
+
+}
+
+
+			
+
+	
+
+
+	fclose(fp);
+	//free(line);
 	//also keep in mind, the first line is the repetition counter.
-	//f->rep_counter = ...
+	char num [1];
+	f->rep_counter = atoi(fgets(num, 1, fp));
+
+
 	return;
 }
 
@@ -47,11 +81,14 @@ frame_t * frame_new(char *pathname, int id) {
 	}
 	f->id = id;
 	load_frame(f, pathname);
+	
 	return f;
 }
 
 void frame_delete(frame_t * f) {
 	//TODO: before we free f what inside f must be free-ed first?
+	free(f->content);
+	free(f);
 }
 
 char* frame_get_content (frame_t *f){
@@ -63,4 +100,10 @@ int frame_get_rep_counter(frame_t * f){
 int frame_get_id(frame_t *f){
 	return f-> id;
 }
+
+
+
+
+
+
 

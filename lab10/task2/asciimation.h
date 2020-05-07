@@ -9,7 +9,7 @@
 #include "slist.h"
 #include "frame.h"
 typedef struct asciimation_t {
-	struct slist_t * frames; //frames is a list of frame pointers. each points to a frame
+	struct slist * frames; //frames is a list of frame pointers. each points to a frame
 	int frames_per_second;//how fast do you play the asciimation?	
 } asciimation_t;
 
@@ -23,6 +23,5 @@ void asciimation_reverse(asciimation_t *);
 //	void asciimation_loop();
 //	void asciimation_deleteFrame(int);
 //	void asciimation_insertFrame(Frame);
-//	void asciimation_save();
-
+//	void asciimation_save(); 
 #endif
