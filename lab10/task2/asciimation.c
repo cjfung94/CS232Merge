@@ -69,8 +69,10 @@ asciimation_t * asciimation_new(char * path, int fps){
 		slist_add_frame(ascm->frames, aframe);
 		
 		
+		
 	
 	}
+	ascm->frames_per_second = fps;
 
 
 
@@ -81,6 +83,14 @@ void asciimation_delete(asciimation_t * ascm){
 	//TODO:your code here
 	//reversed steps of asciimation_new
 	// 1. free all the frames, must implement frame_delete first.(why?)
+	snode_t * temp = slist_get_front(ascm->frames);
+	for(int i=0; i<slist_length(ascm->frames); i++) 
+	{
+		frame_delete(snode_get_frame(temp));
+		temp = snode_get_next(temp);
+	}
+	free(ascm->frames);
+	free(ascm);
 	// 2. free the list
 	// 3. free the ascm itself
 }
@@ -92,13 +102,13 @@ void asciimation_play(asciimation_t * ascm){
 	snode_t * temp = slist_get_front(ascm->frames);
 	for(int i=0; i<slist_length(ascm->frames); i++) {
 	printf("%s",frame_get_content(snode_get_frame(temp)));
+
+	sleep((1 * frame_get_rep_counter(snode_get_frame(temp))));//sleep for frames_per_second * repetition_counter_of_the_frame
+	//system("clear");	//clear the screen
 	temp = snode_get_next(temp);
-	sleep(1);//sleep for frames_per_second * repetition_counter_of_the_frame
-	system("clear");	//clear the screen
 
 
-
-	
+	//ascm->frames_per_second
 
 
 	}
@@ -108,6 +118,23 @@ void asciimation_play(asciimation_t * ascm){
 void asciimation_reverse(asciimation_t * ascm){
 	//TODO:Your code here
 	//same logic as above, only difference is loop through the list backward.
+	reverse(ascm->frames);
+
+	snode_t * temp = slist_get_front(ascm->frames);
+
+	for(int i=0; i<slist_length(ascm->frames); i++) {
+	printf("%s",frame_get_content(snode_get_frame(temp)));
+
+	sleep(1 * frame_get_rep_counter(snode_get_frame(temp)));//sleep for frames_per_second * repetition_counter_of_the_frame
+	//system("clear");	//clear the screen
+	temp = snode_get_next(temp);
+
+
+	
+
+
+	}
+
 }
 
 

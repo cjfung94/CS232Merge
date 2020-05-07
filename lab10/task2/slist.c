@@ -260,6 +260,77 @@ snode_t* slist_add_frame(slist_t *l, void *frame)
 
 }
 
+void reverse(slist_t* l) 
+{ 
+    snode_t* previous = NULL; 
+    snode_t* current = l->front; 
+    snode_t* follow = l->front;
+    snode_t* temp = l->front;
+  
+    while (follow != NULL) { 
+        // Store next 
+        
+        
+        follow = snode_get_next(current);
+        //next = current->next; 
+
+        // Reverse current node's pointer 
+        //current->next = previous;
+        snode_set_next(current, previous);
+        //current->next = prev
+        //snode_set_next(follow, current);
+
+        // Move pointers one position ahead. 
+        previous = current; 
+        current = follow; 
+
+        
+
+        
+    } 
+
+
+    //*head_ref = prev; 
+    l->back = temp;
+
+    l->front = previous;
+    
+    snode_set_next(l->back , NULL);
+}
+
+/*void slist_delete_frame(slist_t *l, void * data) //change return type
+{
+    snode_t * pred = l->front;
+    snode_t* temp = NULL;
+
+    //while(pred->next != NULL)
+    while(snode_get_next(pred) != NULL)
+    {
+        //if(strcmp(pred->next->str, str) == 0)
+        if(strcmp(snode_get_frame(snode_get_next(pred)), data) == 0)
+        {
+                                         //temp = pred->next;
+              temp = snode_get_next(pred);
+        
+                              //pred->next = pred->next->next;
+                snode_set_next(pred , snode_get_next(temp));
+              //pred = snode_get_next(snode_get_next(pred));
+                                          //free(temp->str);
+               free(snode_get_frame(temp));
+               free(temp);
+      
+            
+
+        }
+        else 
+        {
+            pred = snode_get_next(pred);
+
+        }
+
+    }
+}
+ */
 
 
 

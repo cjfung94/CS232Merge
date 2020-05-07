@@ -56,17 +56,23 @@ static void load_frame(frame_t *f, char *path){
 
 }
 
-
-			
-
+	//opened new file stream to get rep counter
+	FILE *fs;
+	char first_char;
 	
-
-
+	fs = fopen(path, "r");
+	first_char = fgetc(fs);
+	f->rep_counter = atoi(&first_char);
+	/*char count;
+	count = fgetc(fp);
+	f->rep_counter = (int)count;*/
+	
+	//printf("%d", f->rep_counter);
 	fclose(fp);
-	//free(line);
+	fclose(fs);
+	free(line);
 	//also keep in mind, the first line is the repetition counter.
-	char num [1];
-	f->rep_counter = atoi(fgets(num, 1, fp));
+
 
 
 	return;

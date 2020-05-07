@@ -107,6 +107,8 @@ struct snode* slist_get_back(struct slist* l);
 
 snode_t* slist_add_frame(slist_t *l, void *frame);
 
+void reverse(slist_t* l);
+
 
 
 #endif /* _slist_H_ */

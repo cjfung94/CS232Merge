@@ -23,5 +23,5 @@ void snode_set_frame(snode_t* snode , void* frame);
 frame_t* snode_get_frame(snode_t* snode);
 char * mystring_cat(char *s, char * s2);
 
- 
+  
  #endif
