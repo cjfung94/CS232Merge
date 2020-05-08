@@ -73,7 +73,7 @@ int main() {
 			return 1;//impossible
 		}
 		printf("[press any key to continue]\n");
-		//system("@cls||clear");
+		system("@cls||clear");
 	} while (1);
 	
 }

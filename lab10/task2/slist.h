@@ -109,6 +109,7 @@ snode_t* slist_add_frame(slist_t *l, void *frame);
 
 void reverse(slist_t* l);
 
+void slist_destroy_frame(slist_t *l);
 
 
 #endif /* _slist_H_ */

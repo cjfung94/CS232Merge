@@ -37,7 +37,7 @@ slist_t *slist_create()
  * @param str pointer to a C string to store in new list node
  * returns a pointer to the newly added node
  */
-snode_t* slist_add_back(slist_t *l, char *str)
+snode_t* slist_add_back(slist_t *l, void *str)
 {
 
     snode_t * newNode = (snode_t*) calloc (1,sizeof(slist_t)); //set next 

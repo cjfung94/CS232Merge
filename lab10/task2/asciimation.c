@@ -105,7 +105,8 @@ void asciimation_delete(asciimation_t * ascm){
 		frame_delete(snode_get_frame(temp));
 		temp = snode_get_next(temp);
 	}
-	free(ascm->frames);
+	slist_destroy(ascm->frames);
+	
 	free(ascm);
 	// 2. free the list
 	// 3. free the ascm itself
@@ -120,7 +121,7 @@ void asciimation_play(asciimation_t * ascm){
 	printf("%s",frame_get_content(snode_get_frame(temp)));
 
 	sleep(1);//sleep for frames_per_second * repetition_counter_of_the_frame
-	//system("clear");	//clear the screen
+	system("clear");	//clear the screen
 	temp = snode_get_next(temp);
 
 
@@ -142,7 +143,7 @@ void asciimation_reverse(asciimation_t * ascm){
 	printf("%s",frame_get_content(snode_get_frame(temp)));
 
 	sleep(1);//sleep for frames_per_second * repetition_counter_of_the_frame
-	//system("clear");	//clear the screen
+	system("clear");	//clear the screen
 	temp = snode_get_next(temp);
 
 

@@ -298,40 +298,22 @@ void reverse(slist_t* l)
     snode_set_next(l->back , NULL);
 }
 
-/*void slist_delete_frame(slist_t *l, void * data) //change return type
+void slist_destroy_frame(slist_t *l)
 {
-    snode_t * pred = l->front;
-    snode_t* temp = NULL;
+  snode_t * now = l->front;
+  snode_t * listdestroy;
+  while (now != NULL)
+  {
+    listdestroy = snode_get_next(now);
+                          //listdestroy = now -> next;
+    free(snode_get_frame(now));
+                          //free (now->str);
+    free(now);
+    now = listdestroy;
+  }
+  free(l);
 
-    //while(pred->next != NULL)
-    while(snode_get_next(pred) != NULL)
-    {
-        //if(strcmp(pred->next->str, str) == 0)
-        if(strcmp(snode_get_frame(snode_get_next(pred)), data) == 0)
-        {
-                                         //temp = pred->next;
-              temp = snode_get_next(pred);
-        
-                              //pred->next = pred->next->next;
-                snode_set_next(pred , snode_get_next(temp));
-              //pred = snode_get_next(snode_get_next(pred));
-                                          //free(temp->str);
-               free(snode_get_frame(temp));
-               free(temp);
-      
-            
-
-        }
-        else 
-        {
-            pred = snode_get_next(pred);
-
-        }
-
-    }
 }
- */
-
 
 
 
