@@ -31,7 +31,7 @@ static void load_frame(frame_t *f, char *path){
     	 char * line = NULL; 
 
 		//char * trial = (char *) malloc (10000 * sizeof(char)+ 1);
-		f->content = (char *) malloc (sizeof(char) + 1);
+		f->content = (char *) calloc (1,sizeof(char) + 1);
 		fp = fopen(path, "r");
 
     	if (fp == NULL)
@@ -49,9 +49,23 @@ static void load_frame(frame_t *f, char *path){
 		//your task is not to print the line, instead, you need to save the line to
 		//f->content
 		sum = sum + read;
-		f->content = (char *) realloc (f->content, sum * sizeof(char) + 1);
+		f->content = realloc (f->content, sum * sizeof(char *) + 1);
+		int d = 0;
+		int i = 0;
 
-		f->content = mystring_cat(f->content, line);
+
+   		 for (i = 0; f->content[i] != '\0'; i++)
+   		 {
+
+  		 }
+
+	  for (d = 0; line[d] != '\0'; d++)
+    	{
+   	   f->content[i] = line[d];
+  	    i++;
+ 	   }
+    
+ 	   f->content[i] = '\0';
 
 
 }

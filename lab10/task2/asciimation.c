@@ -36,6 +36,8 @@ static int get_num_frames(char *path) {
 		
 
 	}	
+
+	closedir(dir);
 	return n;
 
 }
@@ -100,12 +102,16 @@ void asciimation_delete(asciimation_t * ascm){
 	//reversed steps of asciimation_new
 	// 1. free all the frames, must implement frame_delete first.(why?)
 	snode_t * temp = slist_get_front(ascm->frames);
+
 	for(int i=0; i<slist_length(ascm->frames); i++) 
 	{
 		frame_delete(snode_get_frame(temp));
 		temp = snode_get_next(temp);
+
+
 	}
-	slist_destroy(ascm->frames);
+	slist_destroy_frame(ascm->frames);
+
 	
 	free(ascm);
 	// 2. free the list

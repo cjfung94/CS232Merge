@@ -61,7 +61,7 @@ char* snode_get_str(snode_t* snode)
 
 void snode_set_frame(snode_t* snode , void* frame)
 {
-  snode -> data = (frame_t *) malloc (sizeof(frame_t));
+//  snode -> data = (frame_t *) malloc (sizeof(frame_t));
   snode -> data = frame;
 
 }
@@ -72,30 +72,6 @@ frame_t* snode_get_frame(snode_t* snode)
   //getStr -> str = l->front->str;
   return snode->data;
   
-}
-char * mystring_cat(char *s, char *s2) {
-    int i = 0;
-    int d = 0;
-    int len1, len2;
-    len1 = strlen(s);
-    len2 = strlen(s2);
-    char * newchar = (char *) malloc ((len1+len2) * sizeof(char) + 1);
-
-    for (i = 0; s[i] != '\0'; i++)
-    {
-      
-      newchar[i] = s[i];
-    }
-
-    for (d = 0; s2[d] != '\0'; d++)
-    {
-      newchar[i] = s2[d];
-      i++;
-    }
-    
-    newchar[i] = '\0';
-   
-    return newchar;
 }
 
 

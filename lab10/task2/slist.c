@@ -306,7 +306,7 @@ void slist_destroy_frame(slist_t *l)
   {
     listdestroy = snode_get_next(now);
                           //listdestroy = now -> next;
-    free(snode_get_frame(now));
+   // free(snode_get_frame(now));
                           //free (now->str);
     free(now);
     now = listdestroy;
