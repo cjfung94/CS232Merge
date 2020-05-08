@@ -46,6 +46,14 @@ asciimation_t * asciimation_new(char * path, int fps){
 		perror("failed allocation\n");
 		return 0;
 	}
+
+	FILE * fp;
+	fp = fopen(path, "r");
+
+	if(fp == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
 	//figure out how many frames are in the dir?
 	int n = get_num_frames(path);
 
@@ -72,9 +80,17 @@ asciimation_t * asciimation_new(char * path, int fps){
 		
 	
 	}
+	if(fps <= 0)
+	{
+		exit(EXIT_FAILURE);
+	}
+
 	ascm->frames_per_second = fps;
 
+	
+	
 
+	fclose(fp);
 
 	return ascm;
 }
@@ -103,7 +119,7 @@ void asciimation_play(asciimation_t * ascm){
 	for(int i=0; i<slist_length(ascm->frames); i++) {
 	printf("%s",frame_get_content(snode_get_frame(temp)));
 
-	sleep((1 * frame_get_rep_counter(snode_get_frame(temp))));//sleep for frames_per_second * repetition_counter_of_the_frame
+	sleep(1);//sleep for frames_per_second * repetition_counter_of_the_frame
 	//system("clear");	//clear the screen
 	temp = snode_get_next(temp);
 
@@ -125,7 +141,7 @@ void asciimation_reverse(asciimation_t * ascm){
 	for(int i=0; i<slist_length(ascm->frames); i++) {
 	printf("%s",frame_get_content(snode_get_frame(temp)));
 
-	sleep(1 * frame_get_rep_counter(snode_get_frame(temp)));//sleep for frames_per_second * repetition_counter_of_the_frame
+	sleep(1);//sleep for frames_per_second * repetition_counter_of_the_frame
 	//system("clear");	//clear the screen
 	temp = snode_get_next(temp);
 

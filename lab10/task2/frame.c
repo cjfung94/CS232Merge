@@ -62,7 +62,18 @@ static void load_frame(frame_t *f, char *path){
 	
 	fs = fopen(path, "r");
 	first_char = fgetc(fs);
-	f->rep_counter = atoi(&first_char);
+
+	if(first_char > 0)
+	{
+		f->rep_counter = atoi(&first_char);
+	}
+
+	else
+	{
+		exit(EXIT_FAILURE);
+	}
+	
+	
 	/*char count;
 	count = fgetc(fp);
 	f->rep_counter = (int)count;*/
